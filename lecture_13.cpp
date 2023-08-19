@@ -40,3 +40,10 @@ pair<int, int> firstAndLastPosition(vector<int>& arr, int n, int k) {
 
     return {first, last};
 }
+
+
+
+int main() {
+    vector<int> nums = {0, 0, 1, 1, 2, 2, 2, 2};
+    cout << firstAndLastPosition(nums, nums.size(), 2).first << " " << firstAndLastPosition(nums, nums.size(), 2).second;
+}
