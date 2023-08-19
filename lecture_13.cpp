@@ -45,5 +45,6 @@ pair<int, int> firstAndLastPosition(vector<int>& arr, int n, int k) {
 
 int main() {
     vector<int> nums = {0, 0, 1, 1, 2, 2, 2, 2};
-    cout << firstAndLastPosition(nums, nums.size(), 2).first << " " << firstAndLastPosition(nums, nums.size(), 2).second;
+    cout << firstAndLastPosition(nums, nums.size(), 2).first << " " << firstAndLastPosition(nums, nums.size(), 2).second << endl;
+    cout << "Total number of occurrence: " << firstAndLastPosition(nums, nums.size(), 2).second - firstAndLastPosition(nums, nums.size(), 2).first + 1;
 }
