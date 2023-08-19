@@ -42,9 +42,29 @@ pair<int, int> firstAndLastPosition(vector<int>& arr, int n, int k) {
 }
 
 
+// https://leetcode.com/problems/peak-index-in-a-mountain-array/
+int peakIndexInMountainArray(vector<int>& arr) {
+    int start = 0;
+    int end = arr.size();
+    int mid = start + (end - start) / 2;
+
+    while(start < end) {
+        if(arr[mid] < arr[mid+1]) start = mid + 1;
+        else end = mid;
+        mid = start + (end - start) / 2;
+    }
+
+    return mid;
+}
+
 
 int main() {
-    vector<int> nums = {0, 0, 1, 1, 2, 2, 2, 2};
+    vector<int> nums;
+    
+    nums = {0, 0, 1, 1, 2, 2, 2, 2};
     cout << firstAndLastPosition(nums, nums.size(), 2).first << " " << firstAndLastPosition(nums, nums.size(), 2).second << endl;
-    cout << "Total number of occurrence: " << firstAndLastPosition(nums, nums.size(), 2).second - firstAndLastPosition(nums, nums.size(), 2).first + 1;
+    cout << "Total number of occurrence: " << firstAndLastPosition(nums, nums.size(), 2).second - firstAndLastPosition(nums, nums.size(), 2).first + 1 << endl;
+
+    nums = {3, 5, 9, 6, 2, 1};
+    cout << "Peak index is: " << peakIndexInMountainArray(nums);
 }
