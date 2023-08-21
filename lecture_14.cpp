@@ -2,12 +2,27 @@
 using namespace std;
 
 
+int binarySearch(vector<int> arr, int start, int end, int key) {
+    int mid = start + (end - start) / 2;
+
+    while(start <= end) {
+        if(arr[mid] == key) return mid;
+        else if(arr[mid] < key) start = mid + 1;
+        else end = mid - 1;
+        mid = start + (end - start) / 2;
+    }
+
+    return -1;
+}
+
+
+
 // https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 int findMinInRotatedSorted(vector<int> arr) {
     int start = 0;
     int end = arr.size()-1;
     
-    if(arr[start] <= arr[end]) return arr[start];
+    if(arr[start] <= arr[end]) return start;
     
     int mid = start + (end - start) / 2;
 
@@ -17,7 +32,7 @@ int findMinInRotatedSorted(vector<int> arr) {
         mid = start + (end - start) / 2;
     }
 
-    return arr[mid];
+    return mid;
 }
 
 
@@ -95,6 +110,20 @@ double sqrtWithPrecision(int x, int decimalPlace) {
 }
 
 
+
+// https://leetcode.com/problems/search-in-rotated-sorted-array/
+int searchInRotatedSortedArray(vector<int> arr, int key) {
+
+    if(arr.size() == 1) return (arr[0] == key) ? 0 : -1;
+
+    int minEle = findMinInRotatedSorted(arr);
+    return (arr[minEle] <= key && key <= arr[arr.size()-1]) ?
+        binarySearch(arr, minEle, arr.size()-1, key) :
+        binarySearch(arr, 0, minEle - 1, key) ;
+}
+
+
+
 int main() {
     vector<int> nums;
 
@@ -104,7 +133,11 @@ int main() {
     // nums = {1,2,3,4,5,4,0};
     // cout << peakInAMountainArray(nums) << endl;
 
-    int n = 63;
-    cout << sqrtOfX(n) << endl;
-    cout << sqrtWithPrecision(n, 5) << endl;
+    // int n = 63;
+    // cout << sqrtOfX(n) << endl;
+    // cout << sqrtWithPrecision(n, 5) << endl;
+
+    nums = {4,5,6,7,0,1,2};
+    int target = 0;
+    cout << searchInRotatedSortedArray(nums, target);
 }
