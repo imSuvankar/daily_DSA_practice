@@ -88,7 +88,7 @@ public:
 
 
 // https://www.codingninjas.com/studio/problems/aggressive-cows_1082559
-class AggresiveCows {
+class AggressiveCows {
 private:
     bool isPossible(vector<int> arr, int cows, int mid) 
     {
@@ -143,5 +143,5 @@ int main() {
 
     arr = {0,3,4,7,10,9};
     k = 4;
-    cout << AggresiveCows().aggressiveCows(arr, k);
+    cout << AggressiveCows().aggressiveCows(arr, k);
 }
