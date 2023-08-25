@@ -44,11 +44,57 @@ public:
 
 
 
+// https://www.codingninjas.com/studio/problems/painter-s-partition-problem_1089557
+class PaintersPartition {
+private:
+    bool isPossible(vector<int> arr, int k, int mid) 
+    {
+        int painter = 1;
+        int board = 0;
+
+        for(int i : arr) {
+            if(board + i <= mid) board += i;
+            else {
+                painter++;
+                if(painter > k || i > mid) return false;
+                board = i;
+            }
+        }
+
+        return true;
+    }
+
+public:
+    int findLargestMinDistance(vector<int> &boards, int k)
+    {
+        int start = 0;
+        int end = accumulate(boards.begin(), boards.end(), 0);
+        int mid = start + (end - start) / 2;
+        int ans = -1;
+
+        while(start <= end) {
+            if(isPossible(boards, k, mid)) {
+                ans = mid;
+                end = mid - 1;
+            }
+            else start = mid + 1;
+            mid = start + (end - start) / 2;
+        }
+
+        return ans;
+    }
+};
+
+
 
 int main() {
-    vector<int> arr;
+    vector<int> arr; int k;
 
-    arr = {3,2,2,4,1,4};
-    int k = 3;
-    cout << BookAllocationProblem().shipWithinDays(arr, k);
+    // arr = {3,2,2,4,1,4};
+    // k = 3;
+    // cout << BookAllocationProblem().shipWithinDays(arr, k) << endl;
+
+    arr = {2,1,5,6,2,3};
+    k = 2;
+    cout << PaintersPartition().findLargestMinDistance(arr, k) << endl;
 }
